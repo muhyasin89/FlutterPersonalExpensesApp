@@ -12,44 +12,54 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: 350,
-        child: ListView.builder(
-            itemCount: transactions.length,
-            itemBuilder: (ctx, index) {
-              return Card(
-                  child: Row(
+        child: transactions.isEmpty
+            ? Column(
                 children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 15,
-                    ),
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 2,
-                      ),
-                    ),
-                    child: Text(
-                      'Rp.${transactions[index].amount}',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
+                  Text(
+                    'No Transaction added yet!',
+                    // style: Theme.of(context).textTheme.title,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Image.asset('assets/images/waiting.png'),
+                ],
+              )
+            : ListView.builder(
+                itemCount: transactions.length,
+                itemBuilder: (ctx, index) {
+                  return Card(
+                      child: Row(
                     children: <Widget>[
-                      Text(
-                        transactions[index].title,
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 15,
+                        ),
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 2,
+                          ),
+                        ),
+                        child: Text(
+                          'Rp.${transactions[index].amount}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
                       ),
-                      Text(
-                        DateFormat.yMMMd().format(transactions[index].date),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            transactions[index].title,
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            DateFormat.yMMMd().format(transactions[index].date),
+                          )
+                        ],
                       )
                     ],
-                  )
-                ],
-              ));
-            }));
+                  ));
+                }));
   }
 }
